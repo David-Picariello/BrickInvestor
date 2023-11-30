@@ -4,6 +4,11 @@
  */
 package com.mycompany.brickinvestor;
 
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author davidpicariello
@@ -15,8 +20,13 @@ public class OrderLogJFrame extends javax.swing.JFrame {
      */
     public OrderLogJFrame() {
         initComponents();
+        
     }
-
+    //Create Add order Jframe
+    AddOrderJFrame AddOrder = new AddOrderJFrame();
+    
+   
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,7 +37,7 @@ public class OrderLogJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableOrderLog = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnInfo = new javax.swing.JButton();
@@ -35,20 +45,22 @@ public class OrderLogJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableOrderLog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Date", "Set Number", "Description", "Quanity", "Cost per Set", "Reward Points", "Total Cost", "Supplier"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableOrderLog);
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +118,23 @@ public class OrderLogJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        AddOrder.setVisible(true);
+        
+        
+    }//GEN-LAST:event_btnAddActionPerformed
+    // Getter method to access the JTable
+    public JTable getTable() {
+        return tableOrderLog;
+    }
+    public TableModel getModel(){
+        return tableOrderLog.getModel();
+    }
+    //Add Row to Table
+    public static void AddRowToJTable(Object[] dataRow){
+        DefaultTableModel model = (DefaultTableModel) tableOrderLog.getModel();
+        model.addRow(dataRow);
+    }
     /**
      * @param args the command line arguments
      */
@@ -148,6 +177,6 @@ public class OrderLogJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnInfo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private static javax.swing.JTable tableOrderLog;
     // End of variables declaration//GEN-END:variables
 }
