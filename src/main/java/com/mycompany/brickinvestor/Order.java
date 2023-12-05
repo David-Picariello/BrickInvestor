@@ -11,19 +11,25 @@ package com.mycompany.brickinvestor;
 public class Order {
      //fields
     private int setID;
-    private int initialCost;
+    private float initialCost;
     private int quantity;
-    private int rewardPoints;
+    private float rewardPoints;
     private String description;
     private String supplier;
+    private float costPerItem;
+    private float numPieces;
+    private float pricePerPiece;
     
-    public Order(int SetID,int initialCost,int quantity,int rewardPoints,String description,String supplier){
+    public Order(int SetID,float initialCost,int quantity,float rewardPoints,String description,String supplier,float numPieces){
         this.setID = SetID;
         this.initialCost = initialCost;
         this.quantity = quantity;
         this.rewardPoints = rewardPoints;
         this.description = description;
         this.supplier = supplier;
+        this.numPieces = numPieces;
+        this.costPerItem = (initialCost - rewardPoints)/quantity;
+        this.pricePerPiece = costPerItem/this.numPieces;
         
         
         
@@ -33,7 +39,7 @@ public class Order {
         return setID;
     }
 
-    public int getInitialCost() {
+    public float getInitialCost() {
         return initialCost;
     }
 
@@ -41,7 +47,7 @@ public class Order {
         return quantity;
     }
 
-    public int getRewardPoints() {
+    public float getRewardPoints() {
         return rewardPoints;
     }
 
@@ -51,5 +57,12 @@ public class Order {
 
     public String getSupplier() {
         return supplier;
+    }
+    public float getcostPerItem() {
+        return costPerItem;
+    }
+    public float getpricePerPiece() {
+         
+        return pricePerPiece;
     }
 }
