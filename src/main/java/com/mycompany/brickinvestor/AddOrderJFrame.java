@@ -10,6 +10,9 @@ import java.util.Date;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.Gson;
+import static java.lang.Float.parseFloat;
 
 
 /**
@@ -23,10 +26,10 @@ public class AddOrderJFrame extends javax.swing.JFrame {
      */
     public AddOrderJFrame() {
         initComponents();
-        //pass order info into orderlog table
-//        JTable table = OrderLogJFrame.getTable();
+        
+        
     }
-
+Gson gson = new Gson();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -205,26 +208,48 @@ public class AddOrderJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         // set order info to get passed in to create an instance of order
             int SetID = parseInt(jTextSetNumber.getText());
-            int InitialCost = parseInt(jTextFieldOrderTotal.getText());
+            float InitialCost = parseFloat(jTextFieldOrderTotal.getText());
             int Quanity = parseInt(jTextFieldQuanity.getText());
-            int RewardPoints = parseInt(jTextFieldRewardPoints.getText());
+            float RewardPoints = parseFloat(jTextFieldRewardPoints.getText());
             String Supplier = String.valueOf(jComboBoxSupplier.getSelectedItem());
+            
             //date to string
             Date dateUnformatted = jDateChooser.getDate();
             String Date = DateFormat.getDateInstance().format(dateUnformatted);
-//            String Date = String.valueOf(jDateChooser.getDate());
+            
+            //get Description from API based on SetID
+            String stringSetID = String.valueOf(SetID)+"-1";
+            String description = APIHelper.getAPIDescription("https://rebrickable.com/api/v3/lego/sets/"+stringSetID+"/");
+            RebrickableResponse rr = gson.fromJson(description, RebrickableResponse.class);
+            
             //create new instance of an order
-            Order order = new Order(SetID,InitialCost,Quanity,RewardPoints,"description",Supplier);
+            Order order = new Order(SetID,InitialCost,Quanity,RewardPoints,rr.name,Supplier,rr.numParts);
             
             //create new instance of inventory
             Inventory inventory = new Inventory();
             //Pass order into inventory
             inventory.addOrder(order);
             
-            OrderLogJFrame.AddRowToJTable(new Object[]{Date,order.getSetID(),"description",order.getQuantity(),"$"+order.getcostPerItem(),"$"+order.getRewardPoints(),"$"+order.getInitialCost(),order.getSupplier()});
+            //add data to create new row in Orderlog Jtable
+            OrderLogJFrame.AddRowToJTable(new Object[]{Date,
+                order.getSetID(),
+                order.getDescription(),
+                order.getQuantity(),
+                "$"+order.getcostPerItem(),
+                "$"+order.getpricePerPiece(),
+                "$"+order.getRewardPoints(),
+                "$"+order.getInitialCost(),
+                order.getSupplier()});
             
-//         
-    
+            //call inventory Jtable set method and pass it inventory
+            CurrentInventoryJFrame.setInventoryJTable(inventory);
+            
+            //Clear form
+            jTextSetNumber.setText("");
+            jTextFieldOrderTotal.setText("");
+            jTextFieldQuanity.setText("");
+            jTextFieldQuanity.setText("");
+            jTextFieldRewardPoints.setText("");
            
         this.dispose();
     }//GEN-LAST:event_btnAddActionPerformed
