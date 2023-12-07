@@ -65,4 +65,16 @@ public class Order {
          
         return pricePerPiece;
     }
+    //set methods
+    public void setQuantity(int newQuanity){
+        this.quantity = newQuanity;
+        
+    }
+    public void setCostPerItem(float initialCost,float rewardPoints){
+        this.costPerItem = ((this.initialCost+initialCost)-(this.rewardPoints+rewardPoints))/this.quantity;
+        setPricePerPiece();
+    }
+    public void setPricePerPiece(){
+        this.pricePerPiece = this.costPerItem/this.numPieces;
+    }
 }
