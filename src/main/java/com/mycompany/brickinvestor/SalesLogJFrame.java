@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.brickinvestor;
-
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 /**
  *
  * @author davidpicariello
@@ -17,6 +20,8 @@ public class SalesLogJFrame extends javax.swing.JFrame {
         initComponents();
     }
 
+    //Create Add Sale Jframe
+    AddSaleJFrame AddSale = new AddSaleJFrame();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,7 +32,7 @@ public class SalesLogJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableSaleLog = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTNet = new javax.swing.JTextField();
@@ -37,28 +42,35 @@ public class SalesLogJFrame extends javax.swing.JFrame {
         btnInfoSales = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableSaleLog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Order Number", "Quantity", "Order Total", "Description", "Net", "ROI"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableSaleLog);
 
         jLabel1.setText("Net");
 
         jLabel2.setText("Quantity Sold");
 
         btnAddSale.setText("Add");
+        btnAddSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddSaleActionPerformed(evt);
+            }
+        });
 
         btnDeleteSale.setText("Delete");
+        btnDeleteSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteSaleActionPerformed(evt);
+            }
+        });
 
         btnInfoSales.setText("Info");
 
@@ -125,6 +137,30 @@ public class SalesLogJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAddSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSaleActionPerformed
+        AddSale.setVisible(true);
+    }//GEN-LAST:event_btnAddSaleActionPerformed
+
+    private void btnDeleteSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteSaleActionPerformed
+        int selectedRow = tableSaleLog.getSelectedRow();
+         //get instance of inventory
+//         Inventory inventory = Inventory.getInstance();
+
+        if (selectedRow != -1) {
+            DefaultTableModel model = (DefaultTableModel) tableSaleLog.getModel();
+            model.removeRow(selectedRow);
+//            inventory.removeOrderBySelectedRow(selectedRow);
+//            CurrentInventoryJFrame.setInventoryJTable(inventory);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to clear.");
+        }
+    }//GEN-LAST:event_btnDeleteSaleActionPerformed
+     //Add Row to Table
+    public static void AddRowToJTable(Object[] dataRow){
+        DefaultTableModel model = (DefaultTableModel) tableSaleLog.getModel();
+        model.addRow(dataRow);
+    }
     /**
      * @param args the command line arguments
      */
@@ -170,6 +206,6 @@ public class SalesLogJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTNet;
     private javax.swing.JTextField jTQuantitySold;
-    private javax.swing.JTable jTable1;
+    private static javax.swing.JTable tableSaleLog;
     // End of variables declaration//GEN-END:variables
 }
