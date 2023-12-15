@@ -4,7 +4,12 @@
  */
 package com.mycompany.brickinvestor;
 
+import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -36,32 +41,51 @@ public class OrderLogJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableOrderLog = new javax.swing.JTable();
-        btnAdd = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        btnInfo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+
+        tableOrderLog.setBackground(new java.awt.Color(204, 255, 204));
+        tableOrderLog.setFont(new java.awt.Font("Optima", 1, 14)); // NOI18N
         tableOrderLog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Date", "Set Number", "Description", "Quanity", "Cost per Set", "Reward Points", "Total Cost", "Supplier"
+                "Date", "Description", "Quanity", "Cost per Set", "Price per Piece", "Total Cost", "Supplier"
             }
-        ));
-        jScrollPane1.setViewportView(tableOrderLog);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
 
-        btnAdd.setText("Add");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jScrollPane1.setViewportView(tableOrderLog);
+        if (tableOrderLog.getColumnModel().getColumnCount() > 0) {
+            tableOrderLog.getColumnModel().getColumn(0).setResizable(false);
+            tableOrderLog.getColumnModel().getColumn(1).setResizable(false);
+            tableOrderLog.getColumnModel().getColumn(2).setResizable(false);
+            tableOrderLog.getColumnModel().getColumn(3).setResizable(false);
+            tableOrderLog.getColumnModel().getColumn(4).setResizable(false);
+            tableOrderLog.getColumnModel().getColumn(5).setResizable(false);
+        }
 
+        jLabel1.setFont(new java.awt.Font("Optima", 1, 18)); // NOI18N
+        jLabel1.setText("Order Log");
+
+        btnDelete.setBackground(new java.awt.Color(204, 255, 204));
+        btnDelete.setFont(new java.awt.Font("Optima", 1, 14)); // NOI18N
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delete.png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,53 +93,121 @@ public class OrderLogJFrame extends javax.swing.JFrame {
             }
         });
 
-        btnInfo.setText("Info");
+        btnAdd.setBackground(new java.awt.Color(204, 255, 204));
+        btnAdd.setFont(new java.awt.Font("Optima", 1, 14)); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
+        btnAdd.setText("Add");
+        btnAdd.setMaximumSize(new java.awt.Dimension(75, 25));
+        btnAdd.setMinimumSize(new java.awt.Dimension(75, 25));
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
-        jLabel1.setText("Order Log");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnDelete)
+                .addGap(142, 142, 142)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(btnAdd)
-                        .addGap(162, 162, 162)
-                        .addComponent(btnDelete)
-                        .addGap(126, 126, 126)
-                        .addComponent(btnInfo)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(308, 308, 308)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(329, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnDelete)
-                    .addComponent(btnInfo))
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+     public static void setOrderLogJTable(){
+        //get instance of inventory
+        Inventory inventory = Inventory.getInstance();
+        
+        ArrayList<Order> orders = inventory.getOrders();
+        
+        
+        //create model
+        DefaultTableModel model = (DefaultTableModel) tableOrderLog.getModel();
+        //set room for description
+        tableOrderLog.getColumnModel().getColumn(1).setPreferredWidth(200);
+        //make quantity room smaller
+        tableOrderLog.getColumnModel().getColumn(2).setPreferredWidth(40);
+        //clear the Order Jtable
+        model.setRowCount(0);
+        for (Order order:orders){
+             AddRowToJTable(model,new Object[]{order.getDatePurchased(),
+                order.getDescription(),
+                order.getQuantity(),
+                "$"+order.getCostPerItem(),
+                "$"+order.getPricePerPiece(),
+                "$"+order.getTotalCost(),
+                order.getSupplier()});
+        } 
+    }
+    
+    
+    
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = tableOrderLog.getSelectedRow();
+        // get instance of inventory
+        Inventory inventory = Inventory.getInstance();
+
+        if (selectedRow != -1) {
+            DefaultTableModel model = (DefaultTableModel) tableOrderLog.getModel();
+
+            // Get orders list
+            ArrayList<Order> orders = inventory.getOrders();
+             
+            if (selectedRow < orders.size()) {
+                // Remove the order from orders
+                orders.remove(selectedRow);
+                //set orders
+                inventory.setOrders(orders);
+                // Update the orderlog table
+                model.removeRow(selectedRow);
+                //update inventory
+                inventory.updateInventoryList();
+                JOptionPane.showMessageDialog(null, "Order removed successfully.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid selected row index.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row to clear.");
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -123,18 +215,11 @@ public class OrderLogJFrame extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnAddActionPerformed
-    // Getter method to access the JTable
-    public JTable getTable() {
-        return tableOrderLog;
-    }
-    public TableModel getModel(){
-        return tableOrderLog.getModel();
-    }
+   
     //Add Row to Table
-    public static void AddRowToJTable(Object[] dataRow){
-        DefaultTableModel model = (DefaultTableModel) tableOrderLog.getModel();
-        model.addRow(dataRow);
-    }
+    public static void AddRowToJTable(DefaultTableModel model,Object[] dataRow){
+           model.addRow(dataRow);
+       }
     /**
      * @param args the command line arguments
      */
@@ -174,8 +259,8 @@ public class OrderLogJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnInfo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable tableOrderLog;
     // End of variables declaration//GEN-END:variables
