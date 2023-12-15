@@ -1,3 +1,5 @@
+
+
 package com.mycompany.brickinvestor;
 
 import static java.lang.Integer.parseInt;
