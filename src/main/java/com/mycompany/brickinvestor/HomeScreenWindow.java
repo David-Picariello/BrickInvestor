@@ -47,7 +47,7 @@ public class HomeScreenWindow extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -173,6 +173,7 @@ public class HomeScreenWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowDeactivated
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+         //modified code from class
         FileWriter fw = null;
 
         try {
@@ -194,14 +195,14 @@ public class HomeScreenWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-          FileReader fr = null;
+         //modified code from class
+        
+        FileReader fr = null;
 
         try {
         File f = new File(getClass().getResource("/data.json").getFile());
 
-            // typically the file not existing is a problem, but on the first
-            // run of the app, evt will be null and it is OK if it doesn't exist
-            // yet; so just return don't throw an error
+           
             if(!f.exists() && evt == null){
                 return;
             }
