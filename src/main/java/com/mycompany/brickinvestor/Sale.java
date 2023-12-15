@@ -32,6 +32,7 @@ public class Sale {
     private static float totalNet;
     private static int totalQuantity;
     
+    
     //constructor
     public Sale(String orderNumber,int setID, int quantity, float salePrice,float orderTotal,float shipping,String dateSold){
         this.orderNumber = orderNumber;
