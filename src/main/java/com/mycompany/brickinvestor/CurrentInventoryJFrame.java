@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+//David Picariello
 package com.mycompany.brickinvestor;
 
 import java.net.MalformedURLException;
@@ -13,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Image;
+
 
 /**
  *
@@ -38,7 +40,9 @@ public class CurrentInventoryJFrame extends javax.swing.JFrame {
         ArrayList<Order> curInventory = inventory.getInventory();
         
         //set total amount invested
-        jTextFieldTotalAmountInvested.setText(String.valueOf(inventory.getTotalAmountInvested()));
+        int totalAmountInvested = (int)inventory.getTotalAmountInvested();
+        
+        jTextFieldTotalAmountInvested.setText("$"+String.valueOf(totalAmountInvested));
         //set total quantity
         jTextFieldTotalQuanity.setText(String.valueOf(inventory.getTotalQuantity()));
         //disable all the text boxes
@@ -47,9 +51,7 @@ public class CurrentInventoryJFrame extends javax.swing.JFrame {
         jTextNumberOfPieces.setEditable(false);
         jTextFieldYearOfRelease.setEditable(false);
         
-        
-        
-        
+  
         //create model
         DefaultTableModel model = (DefaultTableModel) tableInventory.getModel();
         //clear the inventory Jtable
@@ -203,14 +205,17 @@ public class CurrentInventoryJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jTextNumberOfPieces, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jTextFieldTotalAmountInvested, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldTotalAmountInvested, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextFieldTotalQuanity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(17, 17, 17))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextFieldTotalQuanity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addComponent(btnInfo))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
