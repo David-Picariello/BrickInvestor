@@ -4,26 +4,33 @@
  */
 package com.mycompany.brickinvestor;
 
+import com.google.gson.Gson;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author davidpicariello
  */
 public class HomeScreenWindow extends javax.swing.JFrame {
 
-    /**
-     * Creates new form HomeScreenWindow2
-     */
+ 
     public HomeScreenWindow() {
         initComponents();
         
+        
     }
-    //Create Add order Jframe
-    AddOrderJFrame AddOrder = new AddOrderJFrame();
-    //Create Order Log Jframe
-    OrderLogJFrame OrderLog = new OrderLogJFrame();
-    //Create Current Inventory Jframe 
-    CurrentInventoryJFrame CurrentInventory = new CurrentInventoryJFrame();
-    
+     
+     //Create Order Log Jframe
+     OrderLogJFrame OrderLog = new OrderLogJFrame();
+     //Create Current Inventory Jframe 
+     CurrentInventoryJFrame CurrentInventory = new CurrentInventoryJFrame();
+     //Create Sales log Jframe
+     SalesLogJFrame SalesLog = new SalesLogJFrame();
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,115 +40,114 @@ public class HomeScreenWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        btnInventory = new javax.swing.JButton();
         btnSalesLog = new javax.swing.JButton();
-        btnSupplies = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        btnAddOrder = new javax.swing.JButton();
-        btnAddSale = new javax.swing.JButton();
-        btnCurrentInventory = new javax.swing.JButton();
-        btnInventoryHistory = new javax.swing.JButton();
         btnOrderLog = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowDeactivated(java.awt.event.WindowEvent evt) {
+                formWindowDeactivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
+
+        btnInventory.setBackground(new java.awt.Color(255, 102, 102));
+        btnInventory.setFont(new java.awt.Font("Optima", 1, 18)); // NOI18N
+        btnInventory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blocks.png"))); // NOI18N
+        btnInventory.setText("Inventory");
+        btnInventory.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnInventory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInventoryActionPerformed(evt);
+            }
+        });
+
+        btnSalesLog.setBackground(new java.awt.Color(255, 102, 102));
+        btnSalesLog.setFont(new java.awt.Font("Optima", 1, 18)); // NOI18N
+        btnSalesLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/increasing.png"))); // NOI18N
         btnSalesLog.setText("Sales Log");
+        btnSalesLog.setPreferredSize(new java.awt.Dimension(100, 30));
         btnSalesLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalesLogActionPerformed(evt);
             }
         });
 
-        btnSupplies.setText("Supplies");
-        btnSupplies.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuppliesActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("BRICK INVESTOR");
-
-        btnAddOrder.setText("Add Order");
-        btnAddOrder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddOrderActionPerformed(evt);
-            }
-        });
-
-        btnAddSale.setText("Add Sale");
-
-        btnCurrentInventory.setText("Current Inventory");
-        btnCurrentInventory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCurrentInventoryActionPerformed(evt);
-            }
-        });
-
-        btnInventoryHistory.setText("Inventory History");
-        btnInventoryHistory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInventoryHistoryActionPerformed(evt);
-            }
-        });
-
+        btnOrderLog.setBackground(new java.awt.Color(255, 102, 102));
+        btnOrderLog.setFont(new java.awt.Font("Optima", 1, 18)); // NOI18N
+        btnOrderLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clipboard.png"))); // NOI18N
         btnOrderLog.setText("Order Log");
+        btnOrderLog.setPreferredSize(new java.awt.Dimension(100, 30));
         btnOrderLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOrderLogActionPerformed(evt);
             }
         });
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Optima", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("BRICK INVESTOR");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blocksbig.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSalesLog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnOrderLog, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(94, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(41, 41, 41)
+                .addComponent(btnOrderLog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSalesLog, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnInventory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(97, 97, 97)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnOrderLog, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(btnInventoryHistory)
-                                        .addComponent(btnCurrentInventory)))
-                                .addGap(58, 58, 58)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSupplies)
-                                    .addComponent(btnSalesLog))))
-                        .addContainerGap(83, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAddOrder)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                        .addComponent(btnAddSale)
-                        .addGap(87, 87, 87))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1)
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddOrder)
-                    .addComponent(btnAddSale))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOrderLog)
-                    .addComponent(btnSalesLog))
-                .addGap(8, 8, 8)
-                .addComponent(btnCurrentInventory)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnInventoryHistory))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(btnSupplies)))
-                .addContainerGap(82, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -149,31 +155,84 @@ public class HomeScreenWindow extends javax.swing.JFrame {
 
     private void btnSalesLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalesLogActionPerformed
         // TODO add your handling code here:
+        SalesLog.setVisible(true);
     }//GEN-LAST:event_btnSalesLogActionPerformed
 
-    private void btnSuppliesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppliesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSuppliesActionPerformed
-
-    private void btnAddOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddOrderActionPerformed
-        // TODO add your handling code here:
-        AddOrder.setVisible(true);
-        
-    }//GEN-LAST:event_btnAddOrderActionPerformed
-
-    private void btnCurrentInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCurrentInventoryActionPerformed
+    private void btnInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventoryActionPerformed
         // TODO add your handling code here:
         CurrentInventory.setVisible(true);
-    }//GEN-LAST:event_btnCurrentInventoryActionPerformed
-
-    private void btnInventoryHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventoryHistoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnInventoryHistoryActionPerformed
+    }//GEN-LAST:event_btnInventoryActionPerformed
 
     private void btnOrderLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderLogActionPerformed
         // TODO add your handling code here:
         OrderLog.setVisible(true);
     }//GEN-LAST:event_btnOrderLogActionPerformed
+
+    private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowDeactivated
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        FileWriter fw = null;
+
+        try {
+            SaveStateLists val = SaveStateLists.getSaveStateLists();
+            File f = new File(getClass().getResource("/data.json").getFile());
+            fw = new FileWriter(f);
+            Gson gson = new Gson();
+            gson.toJson(val, fw);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "File could not be saved", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                fw.close();
+            } catch (IOException ex) {
+//                Logger.getLogger(HomeScreenWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    //GEN-LAST:event_mnuSaveActionPerformed
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+          FileReader fr = null;
+
+        try {
+        File f = new File(getClass().getResource("/data.json").getFile());
+
+            // typically the file not existing is a problem, but on the first
+            // run of the app, evt will be null and it is OK if it doesn't exist
+            // yet; so just return don't throw an error
+            if(!f.exists() && evt == null){
+                return;
+            }
+            fr = new FileReader(f);
+            Gson gson = new Gson();
+            SaveStateLists val = gson.fromJson(fr, SaveStateLists.class);
+            //get instance of inventory
+            Inventory inventory = Inventory.getInstance();
+            //set lists
+            inventory.setOrders(val.getOrders());
+            inventory.setInventory(val.getInventory());
+            inventory.setSales(val.getSales());
+            //set texts fields
+            inventory.setTotalAmountInvested(val.getTotalAmountInvested());
+            inventory.setTotalQuantity(val.getTotalQuantity());
+            
+            //set 3 tables
+            OrderLogJFrame.setOrderLogJTable();
+            CurrentInventoryJFrame.setInventoryJTable();
+            SalesLogJFrame.setSaleLogJTable();
+            
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "File could not be loaded", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                fr.close();
+            } catch (IOException ex) {
+//                Logger.getLogger(StateExamplesWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -212,13 +271,11 @@ public class HomeScreenWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddOrder;
-    private javax.swing.JButton btnAddSale;
-    private javax.swing.JButton btnCurrentInventory;
-    private javax.swing.JButton btnInventoryHistory;
+    private javax.swing.JButton btnInventory;
     private javax.swing.JButton btnOrderLog;
     private javax.swing.JButton btnSalesLog;
-    private javax.swing.JButton btnSupplies;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
