@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.brickinvestor;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -31,19 +32,23 @@ public class SalesLogJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableSaleLog = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTNet = new javax.swing.JTextField();
-        jTQuantitySold = new javax.swing.JTextField();
-        btnAddSale = new javax.swing.JButton();
-        btnDeleteSale = new javax.swing.JButton();
-        btnInfoSales = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        btnDeleteSale = new javax.swing.JButton();
+        btnAddSale = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTQuantitySold = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jTNet = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+
+        tableSaleLog.setBackground(new java.awt.Color(153, 204, 255));
+        tableSaleLog.setFont(new java.awt.Font("Optima", 1, 14)); // NOI18N
         tableSaleLog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -51,116 +56,194 @@ public class SalesLogJFrame extends javax.swing.JFrame {
             new String [] {
                 "Order Number", "Quantity", "Order Total", "Description", "Net", "ROI"
             }
-        ));
-        jScrollPane1.setViewportView(tableSaleLog);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
-        jLabel1.setText("Net");
-
-        jLabel2.setText("Quantity Sold");
-
-        btnAddSale.setText("Add");
-        btnAddSale.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddSaleActionPerformed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jScrollPane1.setViewportView(tableSaleLog);
+        if (tableSaleLog.getColumnModel().getColumnCount() > 0) {
+            tableSaleLog.getColumnModel().getColumn(0).setResizable(false);
+            tableSaleLog.getColumnModel().getColumn(1).setResizable(false);
+            tableSaleLog.getColumnModel().getColumn(2).setResizable(false);
+            tableSaleLog.getColumnModel().getColumn(3).setResizable(false);
+            tableSaleLog.getColumnModel().getColumn(4).setResizable(false);
+            tableSaleLog.getColumnModel().getColumn(5).setResizable(false);
+        }
 
+        jLabel3.setFont(new java.awt.Font("Optima", 1, 18)); // NOI18N
+        jLabel3.setText("Sales Log");
+
+        btnDeleteSale.setBackground(new java.awt.Color(153, 204, 255));
+        btnDeleteSale.setFont(new java.awt.Font("Optima", 1, 14)); // NOI18N
+        btnDeleteSale.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delete.png"))); // NOI18N
         btnDeleteSale.setText("Delete");
+        btnDeleteSale.setMaximumSize(new java.awt.Dimension(87, 25));
+        btnDeleteSale.setMinimumSize(new java.awt.Dimension(87, 25));
+        btnDeleteSale.setPreferredSize(new java.awt.Dimension(87, 25));
         btnDeleteSale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteSaleActionPerformed(evt);
             }
         });
 
-        btnInfoSales.setText("Info");
+        btnAddSale.setBackground(new java.awt.Color(153, 204, 255));
+        btnAddSale.setFont(new java.awt.Font("Optima", 1, 14)); // NOI18N
+        btnAddSale.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
+        btnAddSale.setText("Add");
+        btnAddSale.setMaximumSize(new java.awt.Dimension(87, 25));
+        btnAddSale.setMinimumSize(new java.awt.Dimension(87, 25));
+        btnAddSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddSaleActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setText("Sales Log");
+        jLabel2.setFont(new java.awt.Font("Optima", 1, 14)); // NOI18N
+        jLabel2.setText("Quantity Sold");
+
+        jTQuantitySold.setFont(new java.awt.Font("Optima", 1, 14)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Optima", 1, 14)); // NOI18N
+        jLabel1.setText("Overall Net");
+
+        jTNet.setFont(new java.awt.Font("Optima", 1, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAddSale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDeleteSale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTQuantitySold, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTNet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(179, 179, 179))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jTNet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTQuantitySold, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnAddSale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnDeleteSale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(302, 302, 302)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(btnAddSale)
-                        .addGap(146, 146, 146)
-                        .addComponent(btnDeleteSale)
-                        .addGap(103, 103, 103)
-                        .addComponent(btnInfoSales)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                        .addComponent(jLabel2)))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTNet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTQuantitySold, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTNet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTQuantitySold, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAddSale)
-                            .addComponent(btnDeleteSale)
-                            .addComponent(btnInfoSales))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     public static void setSaleLogJTable(){
+        //get instance of inventory
+        Inventory inventory = Inventory.getInstance();
+        
+        ArrayList<Sale> sales = inventory.getSales();
+        //set total net
+        jTNet.setText(String.valueOf(Sale.getTotalNet()));
+        //set total quantity sold
+        jTQuantitySold.setText(String.valueOf(Sale.getTotalQuantity()));
+        //change room for description
+        tableSaleLog.getColumnModel().getColumn(3).setPreferredWidth(200);
+        tableSaleLog.getColumnModel().getColumn(1).setPreferredWidth(40);
+        //set text fields to no edit
+        jTNet.setEditable(false);
+        jTQuantitySold.setEditable(false);
+        
+        //create model
+        DefaultTableModel model = (DefaultTableModel) tableSaleLog.getModel();
+        //clear the Order Jtable
+        model.setRowCount(0);
+        for (Sale sale:sales){
+             AddRowToJTable(model,new Object[]{sale.getOrderNumber(),
+                sale.getQuantity(),
+                "$"+sale.getOrderTotal(),
+                sale.getDescription(),
+                "$"+sale.getNet(),
+                sale.getROI()});
+        } 
+    }
+    
+    
     private void btnAddSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSaleActionPerformed
         AddSale.setVisible(true);
     }//GEN-LAST:event_btnAddSaleActionPerformed
 
     private void btnDeleteSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteSaleActionPerformed
         int selectedRow = tableSaleLog.getSelectedRow();
-         //get instance of inventory
-//         Inventory inventory = Inventory.getInstance();
+//         get instance of inventory
+         Inventory inventory = Inventory.getInstance();
 
         if (selectedRow != -1) {
             DefaultTableModel model = (DefaultTableModel) tableSaleLog.getModel();
-            model.removeRow(selectedRow);
-//            inventory.removeOrderBySelectedRow(selectedRow);
-//            CurrentInventoryJFrame.setInventoryJTable(inventory);
-            
+           // Get sales list
+            ArrayList<Sale> sales = inventory.getSales();
+             
+            if (selectedRow < sales.size()) {
+                // Remove the order from orders
+                sales.remove(selectedRow);
+                //set sales
+                inventory.setSales(sales);
+                // Update the orderlog table
+                model.removeRow(selectedRow);
+                JOptionPane.showMessageDialog(null, "Sale removed successfully.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid selected row index.");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row to clear.");
         }
+            
+
     }//GEN-LAST:event_btnDeleteSaleActionPerformed
      //Add Row to Table
-    public static void AddRowToJTable(Object[] dataRow){
-        DefaultTableModel model = (DefaultTableModel) tableSaleLog.getModel();
-        model.addRow(dataRow);
-    }
+    public static void AddRowToJTable(DefaultTableModel model,Object[] dataRow){
+           model.addRow(dataRow);
+       }
     /**
      * @param args the command line arguments
      */
@@ -199,13 +282,13 @@ public class SalesLogJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddSale;
     private javax.swing.JButton btnDeleteSale;
-    private javax.swing.JButton btnInfoSales;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTNet;
-    private javax.swing.JTextField jTQuantitySold;
+    private static javax.swing.JTextField jTNet;
+    private static javax.swing.JTextField jTQuantitySold;
     private static javax.swing.JTable tableSaleLog;
     // End of variables declaration//GEN-END:variables
 }
